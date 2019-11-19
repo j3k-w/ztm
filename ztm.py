@@ -8,15 +8,22 @@ class Bus():
     #     self.estimated_time = self.get_estimated_time()
     #     self.planned_time = self.get_planned_time()
 
-    def json_from_api(self, _stop):
+    def json_from_api(self, _stop: int) -> dict:
         """Downloads the JSON of given bus line."""
 
         # Get the JSON
+        _stop = 1212
+
         link = f'http://ckan2.multimediagdansk.pl/delays?stopId={_stop}'
         content = requests.get(link).json()
 
-        for row in content:
-            print(row)
+        # print(content['delay'][0]['estimatedTime'])
+
+        for record in content['delay']:
+            print(record)
+            # print(record['estimatedTime'])
+
+        return content
 
 
 if __name__ == "__main__":
